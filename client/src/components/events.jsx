@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import EventCard from "./event";
-import CardGroup from "react-bootstrap/CardGroup";
+import EventCard from "./EventCard";
 
 function Events() {
   const [events, setEvents] = useState([]);
@@ -20,16 +19,19 @@ function Events() {
 
   return (
     <div>
-      <CardGroup className="Events">
-        {events.map((event) => (
-          <EventCard
-            key={event.id}
-            title={event.title}
-            location={event.location}
-            time={event.eventtime}
-          />
-        ))}
-      </CardGroup>
+      <div className="Events">
+        {events.map((event) => {
+          const { id, title, location, eventtime } = event;
+          return (
+            <EventCard
+              key={id}
+              title={title}
+              location={location}
+              time={eventtime}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
