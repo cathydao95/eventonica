@@ -25,7 +25,6 @@ app.get("/api/events", async (req, res) => {
   // //real connection with the DB eventonica
   try {
     const { rows: events } = await db.query("SELECT * FROM events");
-    console.log("lol", events);
     res.send(events);
   } catch (error) {
     console.log(error);
