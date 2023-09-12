@@ -1,15 +1,15 @@
-import './App.css';
-import Events from './components/events';
+import "./App.css";
+import Events from "./components/Events";
+import InputEvent from "./components/InputEvent";
 
 function App() {
   return (
     <div className="App">
-    <h1>Techtonica 2023 H2 events</h1>
-  <Events />
-  </div>
-
-  )
-  
+      <h1>Eventonica</h1>
+      <InputEvent />
+      <Events />
+    </div>
+  );
 }
 
-export default App
+export default App;
