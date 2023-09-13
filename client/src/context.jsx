@@ -54,18 +54,20 @@ export const AppProvider = ({ children }) => {
   // CREATE EVENT
   const createNewEvent = async (e) => {
     e.preventDefault();
+    console.log("hi cathy");
     try {
-      console.log("asdasdsa");
       const { event } = state;
       const response = await fetch("http://localhost:8080/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(event),
       });
-      // Why won't this work so I dont have to refresh
-      dispatch({ type: ADD_EVENT, payload: { event } });
+      console.log("response", response);
 
-      window.location.reload();
+      // if
+      console.log("before");
+      dispatch({ type: ADD_EVENT, payload: { event } });
+      console.log("after");
     } catch (error) {
       console.log(error);
     }
@@ -81,8 +83,8 @@ export const AppProvider = ({ children }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(event),
       });
-      window.location.reload();
-      // dispatch({ type: EDIT_EVENT, payload: { event } });
+
+      dispatch({ type: EDIT_EVENT, payload: { event, id } });
     } catch (error) {
       console.log(error);
     }
@@ -95,10 +97,14 @@ export const AppProvider = ({ children }) => {
         `http://localhost:8080/api/events/${id}`,
         { method: "DELETE" }
       );
-      dispatch({ type: DELETE_EVENT, payload: { id } });
+      // if response.ok {
+
+      // if not ok
     } catch (error) {
       console.log(error);
     }
+
+    dispatch({ type: DELETE_EVENT, payload: { id } });
   };
 
   return (
