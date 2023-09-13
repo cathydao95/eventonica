@@ -1,24 +1,26 @@
 import "./EventCard.css";
+import EditEvent from "./EditEvent";
+import { useGlobalContext } from "../context";
 
-const EventCard = ({ title, location, eventtime, id }) => {
-  const deleteEvent = async (id) => {
-    try {
-      const deleteEvent = await fetch(
-        `http://localhost:8080/api/events/${id}`,
-        { method: "DELETE" }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const EventCard = ({ singleEvent }) => {
+  const { deleteEvent } = useGlobalContext();
+  const { title, location, eventtime, id } = singleEvent;
+
+  const date = new Date(eventtime);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const day = String(date.getDate()).padStart(2, "0");
+
+  const formattedDate = `${month}/${day}/${year}`;
 
   return (
     <div className="eventContainer">
-      <div>{title}</div>
-      <div>Date: {!eventtime ? "TBD" : null}</div>
+      <div>Title:{title}</div>
+      <div>Date: {eventtime ? formattedDate : "TBD"}</div>
       <div>Location: {location}</div>
-      <div>
-        <button>Edit</button>
+      <div className="btnContainer">
+        <EditEvent singleEvent={singleEvent} />
+
         <button onClick={() => deleteEvent(id)}>Delete</button>
       </div>
     </div>

@@ -9,6 +9,7 @@ import {
 } from "./actions";
 
 const reducer = (state, action) => {
+  console.log({ action });
   const { showModal, editJobId } = state;
   if (action.type === SHOW_MODAL) {
     return { ...state, showModal: true, editJobId: action.payload.id };
@@ -31,16 +32,24 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ADD_EVENT) {
+    console.log("hello romain");
     const events = state.events;
     const newEvent = action.payload.event;
     return { ...state, events: [...events, newEvent] };
   }
 
-  // if (action.type === EDIT_EVENT) {
-  //   const events = state.events;
-  //   const updatedEvent = action.payload.event;
-  //   return { ...state, events: [...events, updatedEvent] };
-  // }
+  if (action.type === EDIT_EVENT) {
+    const events = state.events;
+    const updatedEvent = action.payload.event;
+    const update = events.map((event) => {
+      if (event.id === action.payload.id) {
+        return action.payload.event;
+      }
+      return event;
+    });
+
+    return { ...state, events: update };
+  }
 
   if (action.type === DELETE_EVENT) {
     const events = state.events;

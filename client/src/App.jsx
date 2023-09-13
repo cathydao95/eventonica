@@ -1,32 +1,16 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import "./App.css";
 import Events from "./components/Events";
+import { useGlobalContext } from "./context";
 
 function App() {
-  const [event, setEvent] = useState({});
+  const { handleChange, createNewEvent } = useGlobalContext();
 
-  const setEventInfo = (e) => {
-    setEvent((prevEvent) => {
-      return { ...prevEvent, [e.target.name]: e.target.value };
-    });
+  const handleEventInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    handleChange(name, value);
   };
-
-  const createNewEvent = async (e) => {
-    e.preventDefault();
-    try {
-      const body = event;
-      const response = await fetch("http://localhost:8080/api/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      window.location = "/";
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(event);
 
   return (
     <div className="App">
@@ -39,7 +23,7 @@ function App() {
             type="text"
             placeholder="Event Name"
             name="title"
-            onChange={setEventInfo}
+            onChange={handleEventInput}
           />
         </div>
         <div>
@@ -49,23 +33,23 @@ function App() {
             type="text"
             placeholder="Location"
             name="location"
-            onChange={setEventInfo}
+            onChange={handleEventInput}
           />
         </div>
         <div>
-          <label htmlFor="eventtime">Event Time:</label>
+          <label htmlFor="eventtime">Event Date:</label>
           <input
             id="eventtime"
-            type="datetime-local"
-            placeholder="Event Time"
+            type="date"
+            placeholder="Event Date"
             name="eventtime"
-            onChange={setEventInfo}
+            onChange={handleEventInput}
           />
         </div>
 
         <button>Add Event</button>
       </form>
-      <Events setEventInfo={setEventInfo} />
+      <Events />
     </div>
   );
 }

@@ -1,34 +1,18 @@
 import { useState, useEffect } from "react";
 import EventCard from "./EventCard";
+import "./Events.css";
+import { useGlobalContext } from "../context";
 
 function Events() {
-  const [events, setEvents] = useState([]);
-
-  const getRequest = () => {
-    fetch("http://localhost:8080/api/events")
-      .then((response) => response.json())
-      .then((events) => {
-        setEvents(events);
-        console.log("Events fetched...", events);
-      });
-  };
-
-  useEffect(() => {
-    getRequest();
-  }, []);
+  const { events } = useGlobalContext();
 
   return (
     <div>
-      <div className="Events">
-        {events.map((event) => {
-          const { id, title, location, eventtime } = event;
+      <div className="eventsContainer">
+        {events.map((singleEvent) => {
+          const { id } = singleEvent;
           return (
-            <EventCard
-              key={id}
-              title={title}
-              location={location}
-              time={eventtime}
-            />
+            <EventCard events={events} key={id} singleEvent={singleEvent} />
           );
         })}
       </div>
