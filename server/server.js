@@ -44,10 +44,10 @@ app.get("/api/events/:id", async (req, res) => {
 
 app.post("/api/events", async (req, res) => {
   try {
-    const { title, location, date } = req.body;
+    const { title, location, eventtime } = req.body;
     const newEvent = await db.query(
       "INSERT INTO events (title, location, eventtime) VALUES($1, $2, $3) RETURNING *",
-      [title, location, date]
+      [title, location, eventtime]
     );
   } catch (error) {
     console.log(error);
@@ -57,10 +57,10 @@ app.post("/api/events", async (req, res) => {
 app.put("/api/events/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, location, date } = req.body;
+    const { title, location, eventtime } = req.body;
     const updateEvent = await db.query(
       "UPDATE events SET (title, location, eventtime) = ($1,$2,$3) WHERE id=$4",
-      [title, location, date, id]
+      [title, location, eventtime, id]
     );
     res.json("Event Updated");
   } catch (error) {
