@@ -49,6 +49,7 @@ app.post("/api/events", async (req, res) => {
       "INSERT INTO events (title, location, eventtime) VALUES($1, $2, $3) RETURNING *",
       [title, location, eventtime]
     );
+    res.json({ status: "success" });
   } catch (error) {
     console.log(error);
   }
@@ -65,6 +66,7 @@ app.put("/api/events/:id", async (req, res) => {
     res.json("Event Updated");
   } catch (error) {
     console.log(error);
+    res.json({ status: "failure" });
   }
 });
 
