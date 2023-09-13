@@ -1,0 +1,19 @@
+.modalContainer {
+  background-color: green;
+  display: none;
+}
+
+.show {
+  display: block;
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
