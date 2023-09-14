@@ -1,15 +1,20 @@
-import { useState, useReducer } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Events from "./components/Events";
 import { useGlobalContext } from "./context";
 
 function App() {
-  const [event, setEvent] = useState({});
-  const { createNewEvent } = useGlobalContext();
+  const [event, setEvent] = useState({
+    title: "",
+    location: "",
+    eventtime: "",
+  });
+  const { createNewEvent, events } = useGlobalContext();
 
-  const handleBtnClick = (e) => {
+  const handleBtnClick = async (e) => {
     e.preventDefault();
     createNewEvent(event);
+    setEvent({ title: "", location: "", eventtime: "" });
   };
   const handleEventInput = (e) => {
     setEvent((prevEvent) => {
@@ -17,42 +22,51 @@ function App() {
     });
   };
 
+  // useEffect(() => {
+  //   setEvent({});
+  // }, [events]);
+
   return (
     <div className="App">
       <h1>Eventonica</h1>
-      <form onSubmit={handleBtnClick}>
-        <div>
+      <form className="formContainer" onSubmit={handleBtnClick}>
+        <div className="formRow">
           <label htmlFor="title">Event Name:</label>
           <input
             id="title"
             type="text"
-            placeholder="Event Name"
+            placeholder="Name"
             name="title"
+            autoComplete="off"
             onChange={handleEventInput}
+            value={event.title}
           />
         </div>
-        <div>
-          <label htmlFor="location">Event Name:</label>
+        <div className="formRow">
+          <label htmlFor="location">Event Location:</label>
           <input
             id="location"
             type="text"
             placeholder="Location"
             name="location"
+            autoComplete="off"
             onChange={handleEventInput}
+            value={event.location}
           />
         </div>
-        <div>
+        <div className="formRow">
           <label htmlFor="eventtime">Event Date:</label>
           <input
             id="eventtime"
             type="date"
-            placeholder="Event Date"
             name="eventtime"
+            autoComplete="off"
+            value={event.eventtime}
             onChange={handleEventInput}
           />
         </div>
 
-        <button>Add Event</button>
+        <button className="btn">Add Event</button>
       </form>
       <Events />
     </div>
