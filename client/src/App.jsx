@@ -9,22 +9,22 @@ function App() {
     location: "",
     eventtime: "",
   });
-  const { createNewEvent, events } = useGlobalContext();
 
+  const { createNewEvent } = useGlobalContext();
+
+  // FUNCTION TO CALL CREATE EVENT FUNCTION AND CLEAR STATE ONCE CLICKED
   const handleBtnClick = async (e) => {
     e.preventDefault();
     createNewEvent(event);
     setEvent({ title: "", location: "", eventtime: "" });
   };
+
+  // FUNCTION TO HANDLE USER INPUT AND SET EVENT STATE
   const handleEventInput = (e) => {
     setEvent((prevEvent) => {
       return { ...prevEvent, [e.target.name]: e.target.value };
     });
   };
-
-  // useEffect(() => {
-  //   setEvent({});
-  // }, [events]);
 
   return (
     <div className="App">
