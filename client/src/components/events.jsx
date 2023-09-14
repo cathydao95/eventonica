@@ -3,6 +3,7 @@ import "./Events.css";
 import { useGlobalContext } from "../context";
 
 function Events() {
+  // OBTAIN EVENTS STATE FROM CONTEXT
   const { events } = useGlobalContext();
 
   return (
