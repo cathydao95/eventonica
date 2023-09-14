@@ -4,18 +4,24 @@ import Events from "./components/Events";
 import { useGlobalContext } from "./context";
 
 function App() {
-  const { handleChange, createNewEvent } = useGlobalContext();
+  const [event, setEvent] = useState({});
+  const { createNewEvent } = useGlobalContext();
 
+  const handleBtnClick = (e) => {
+    e.preventDefault();
+    createNewEvent(event);
+  };
   const handleEventInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    handleChange(name, value);
+    console.log(e.target.name, e.target.value);
+    setEvent((prevEvent) => {
+      return { ...prevEvent, [e.target.name]: e.target.value };
+    });
   };
 
   return (
     <div className="App">
       <h1>Eventonica</h1>
-      <form onSubmit={createNewEvent}>
+      <form onSubmit={handleBtnClick}>
         <div>
           <label htmlFor="title">Event Name:</label>
           <input
