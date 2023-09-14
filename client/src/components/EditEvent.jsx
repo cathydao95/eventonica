@@ -4,15 +4,11 @@ import { useGlobalContext } from "../context";
 import { MdModeEdit, MdClose } from "react-icons/md";
 
 const EditEvent = ({ singleEvent }) => {
-  const {
-    showEditModal,
-    showModal,
-    closeEditModal,
-    editJobId,
-    handleChange,
-    updateEvent,
-  } = useGlobalContext();
+  const { showEditModal, showModal, closeEditModal, editJobId, updateEvent } =
+    useGlobalContext();
   const { id } = singleEvent;
+
+  // console.log("SINGLEEVENT", singleEvent);
 
   function formatEventTime(eventTime) {
     const date = new Date(eventTime);
