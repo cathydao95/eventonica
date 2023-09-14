@@ -30,15 +30,12 @@ const reducer = (state, action) => {
 
   if (action.type === EDIT_EVENT) {
     const { events } = state;
-    const { updatedEvent, id } = action.payload;
-    const updated = events.map((event) => {
-      if (event.id === id) {
-        return updatedEvent;
-      }
-      return event;
-    });
 
-    return { ...state, events: updated };
+    const { updatedEvent, id } = action.payload;
+    const updatedEvents = events.map((event) => {
+      return event.id === id ? updatedEvent : event;
+    });
+    return { ...state, events: updatedEvents };
   }
 
   if (action.type === DELETE_EVENT) {
