@@ -8,19 +8,23 @@ import {
 } from "./actions";
 
 const reducer = (state, action) => {
+  // SHOW EDIT MODAL
   if (action.type === SHOW_MODAL) {
-    const { showModal, editJobId } = state;
     return { ...state, showModal: true, editJobId: action.payload.id };
   }
+
+  // CLOSE EDIT MODAL
   if (action.type === CLOSE_MODAL) {
     return { ...state, showModal: false, editJobId: action.payload.id };
   }
 
+  // GET ALL EVENTS
   if (action.type === GET_ALL_EVENTS) {
     const events = action.payload.eventsData;
     return { ...state, events: events };
   }
 
+  // CREATE NEW EVENT
   if (action.type === ADD_EVENT) {
     const { events } = state;
     const { newEvent } = action.payload;
@@ -28,9 +32,9 @@ const reducer = (state, action) => {
     return { ...state, events: updatedEvents };
   }
 
+  // UPDATE AN EVENT
   if (action.type === EDIT_EVENT) {
     const { events } = state;
-
     const { updatedEvent, id } = action.payload;
     const updatedEvents = events.map((event) => {
       return event.id === id ? updatedEvent : event;
@@ -38,6 +42,7 @@ const reducer = (state, action) => {
     return { ...state, events: updatedEvents };
   }
 
+  // DELETE AN EVENT
   if (action.type === DELETE_EVENT) {
     const events = state.events;
     const eventId = action.payload.id;
