@@ -8,8 +8,8 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  width: 300px;
   padding: 1rem;
+  width: 100%;
   background-color: rgb(220, 215, 215);
 }
 
@@ -36,3 +36,17 @@
 .deleteBtn:hover {
   color: rgb(111, 37, 37);
 }
+
+@media (min-width: 600px) {
+  .eventContainer {
+    gap: 0.5rem;
+    min-width: 250px;
+  }
+}
+
+/* @media (min-width: 900px) {
+  .eventContainer {
+    gap: 0.5rem;
+    width: 400px;
+  }
+} */

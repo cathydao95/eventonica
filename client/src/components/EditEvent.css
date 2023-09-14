@@ -1,19 +1,16 @@
 .modalContainer {
-  position: relative;
-}
-.modalContainer {
   background-color: rgb(109, 181, 109);
   display: none;
-  position: fixed;
-  top: 100px;
-  left: 30px;
-  width: 90vw;
+  position: absolute;
+  top: 5rem;
+  left: 2rem;
+  right: 2rem;
 }
 
 .editForm {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 0 2rem;
   gap: 1rem;
 }
 
@@ -23,6 +20,7 @@
 .modalHeader {
   display: flex;
   justify-content: space-between;
+  padding: 1rem 2rem;
 }
 
 .btnContainer {
