@@ -10,7 +10,6 @@ function Events() {
       <h2 className="header">Upcoming Events</h2>
       <div className="eventsContainer">
         {events.map((singleEvent, index) => {
-          const { id } = singleEvent;
           return (
             <EventCard events={events} key={index} singleEvent={singleEvent} />
           );
