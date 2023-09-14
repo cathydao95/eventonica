@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./EditEvent.css";
 import { useGlobalContext } from "../context";
+import { MdModeEdit, MdClose } from "react-icons/md";
 
 const EditEvent = ({ singleEvent }) => {
   const {
@@ -40,7 +41,9 @@ const EditEvent = ({ singleEvent }) => {
 
   return (
     <div>
-      <button onClick={() => showEditModal(id)}>Edit</button>
+      <button className="iconBtn" onClick={() => showEditModal(id)}>
+        <MdModeEdit className="editBtn" />
+      </button>
       <div className="modalParentContainer">
         <div
           className={
@@ -51,10 +54,12 @@ const EditEvent = ({ singleEvent }) => {
         >
           <div className="modalHeader">
             <h4>Edit Event</h4>
-            <button onClick={() => closeEditModal(id)}>X</button>
+            <button className="iconBtn" onClick={() => closeEditModal(id)}>
+              <MdClose className="closeBtn" />
+            </button>
           </div>
-          <form>
-            <div>
+          <form className="editForm">
+            <div className="formRow">
               <label htmlFor="title">Event Name:</label>
               <input
                 id="title"
@@ -65,7 +70,7 @@ const EditEvent = ({ singleEvent }) => {
                 value={eventInfo.title}
               />
             </div>
-            <div>
+            <div className="formRow">
               <label htmlFor="location">Event Location:</label>
               <input
                 id="location"
@@ -76,7 +81,7 @@ const EditEvent = ({ singleEvent }) => {
                 value={eventInfo.location}
               />
             </div>
-            <div>
+            <div className="formRow">
               <label htmlFor="eventtime">Event Date:</label>
               <input
                 id="eventtime"
@@ -89,8 +94,18 @@ const EditEvent = ({ singleEvent }) => {
             </div>
           </form>
           <div className="btnContainer">
-            <button onClick={() => updateEvent(id, eventInfo)}>Edit</button>
-            <button onClick={() => closeEditModal(id)}>Cancel</button>
+            <button
+              className="btn edit"
+              onClick={() => {
+                updateEvent(id, eventInfo);
+                closeEditModal(id);
+              }}
+            >
+              Edit
+            </button>
+            <button className="btn cancel" onClick={() => closeEditModal(id)}>
+              Cancel
+            </button>
           </div>
         </div>
       </div>
