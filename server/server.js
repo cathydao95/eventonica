@@ -49,7 +49,9 @@ app.post("/api/events", async (req, res) => {
       "INSERT INTO events (title, location, eventtime) VALUES($1, $2, $3) RETURNING *",
       [title, location, eventtime]
     );
-    res.json({ status: "success" });
+
+    console.log("newEvent", newEvent);
+    res.json({ status: "success", newEvent: newEvent.rows[0] });
   } catch (error) {
     console.log(error);
   }
@@ -59,11 +61,20 @@ app.put("/api/events/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { title, location, eventtime } = req.body;
-    const updateEvent = await db.query(
+    const updatedEvent = await db.query(
       "UPDATE events SET (title, location, eventtime) = ($1,$2,$3) WHERE id=$4",
       [title, location, eventtime, id]
     );
-    res.json({ status: "Event Updated" });
+
+    if (updatedEvent.rowCount === 0) {
+      return res.status(404).json({ status: "Event not found" });
+    }
+    const event = await db.query("SELECT * FROM events WHERE id=$1", [id]);
+
+    res.json({
+      status: "Event Updated",
+      updatedEvent: event.rows[0],
+    });
   } catch (error) {
     console.log(error);
     res.json({ status: "failure" });
