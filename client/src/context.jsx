@@ -33,12 +33,19 @@ export const AppProvider = ({ children }) => {
 
   // GET ALL EVENTS
   const getEvents = async () => {
-    const response = await fetch("http://localhost:8080/api/events");
-    const eventsData = await response.json();
-
-    dispatch({ type: GET_ALL_EVENTS, payload: { eventsData } });
+    try {
+      const response = await fetch("http://localhost:8080/api/events");
+      const eventsData = await response.json();
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      dispatch({ type: GET_ALL_EVENTS, payload: { eventsData } });
+    } catch (error) {
+      console.error("Error occured while fetching data", error);
+    }
   };
 
+  // RUN GET EVENTS WHEN APP LOADS
   useEffect(() => {
     getEvents();
   }, []);
@@ -52,10 +59,13 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(newEvent),
       });
 
-      dispatch({ type: ADD_EVENT, payload: { newEvent } });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error occured while creating event", error);
     }
+    dispatch({ type: ADD_EVENT, payload: { newEvent } });
   };
 
   // EDIT EVENT
@@ -68,24 +78,28 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(updatedEvent),
       });
 
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       dispatch({ type: EDIT_EVENT, payload: { id, updatedEvent } });
     } catch (error) {
-      console.log(error);
+      console.error("Error occured while updating event", error);
     }
   };
 
   // DELETE EVENT
   const deleteEvent = async (id) => {
+    console.log("test", id);
     try {
-      const deleteEvent = await fetch(
-        `http://localhost:8080/api/events/${id}`,
-        { method: "DELETE" }
-      );
-      // if response.ok {
-
-      // if not ok
+      const response = await fetch(`http://localhost:8080/api/events/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error occured while deleting event", error);
     }
 
     dispatch({ type: DELETE_EVENT, payload: { id } });
@@ -96,7 +110,6 @@ export const AppProvider = ({ children }) => {
       value={{
         ...state,
         deleteEvent,
-        // handleChange,
         createNewEvent,
         showEditModal,
         closeEditModal,
