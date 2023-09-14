@@ -45,15 +45,12 @@ export const AppProvider = ({ children }) => {
 
   // CREATE EVENT
   const createNewEvent = async (newEvent) => {
-    console.log(newEvent);
-    console.log("hi cathy");
     try {
       const response = await fetch("http://localhost:8080/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEvent),
       });
-      console.log("response", response);
 
       dispatch({ type: ADD_EVENT, payload: { newEvent } });
     } catch (error) {
@@ -63,7 +60,6 @@ export const AppProvider = ({ children }) => {
 
   // EDIT EVENT
   const updateEvent = async (id, updatedEvent) => {
-    console.log(id, "updatedevent", updatedEvent);
     try {
       const { event } = state;
       const response = await fetch(`http://localhost:8080/api/events/${id}`, {

@@ -32,8 +32,6 @@ const EditEvent = ({ singleEvent }) => {
     formatEventTime(eventInfo.eventtime)
   );
 
-  console.log(formattedDate);
-
   const updateEventInfo = (e) => {
     setEventInfo((prevInfo) => {
       return { ...prevInfo, [e.target.name]: e.target.value };

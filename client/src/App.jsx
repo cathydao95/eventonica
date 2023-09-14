@@ -12,7 +12,6 @@ function App() {
     createNewEvent(event);
   };
   const handleEventInput = (e) => {
-    console.log(e.target.name, e.target.value);
     setEvent((prevEvent) => {
       return { ...prevEvent, [e.target.name]: e.target.value };
     });

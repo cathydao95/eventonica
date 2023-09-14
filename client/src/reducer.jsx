@@ -23,7 +23,6 @@ const reducer = (state, action) => {
 
   if (action.type === ADD_EVENT) {
     const { events } = state;
-    console.log(action.payload);
     const { newEvent } = action.payload;
     const updatedEvents = [...events, newEvent];
     return { ...state, events: updatedEvents };
