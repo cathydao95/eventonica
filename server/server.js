@@ -63,7 +63,7 @@ app.put("/api/events/:id", async (req, res) => {
       "UPDATE events SET (title, location, eventtime) = ($1,$2,$3) WHERE id=$4",
       [title, location, eventtime, id]
     );
-    res.json("Event Updated");
+    res.json({ status: "Event Updated" });
   } catch (error) {
     console.log(error);
     res.json({ status: "failure" });
