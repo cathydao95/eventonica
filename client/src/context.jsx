@@ -8,14 +8,12 @@ import {
   SET_EDIT_EVENT,
   DELETE_EVENT,
   GET_ALL_EVENTS,
-  HANDLE_CHANGE,
 } from "./actions";
 
 const AppContext = createContext();
 
 const initialState = {
   events: [],
-  event: { title: "", location: "", eventtime: "" },
   showModal: false,
   editJobId: "",
 };
@@ -33,18 +31,12 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: CLOSE_MODAL, payload: { id } });
   };
 
-  // HANDLE INPUT CHANGES
-  const handleChange = (name, value) => {
-    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
-  };
-
   // GET ALL EVENTS
   const getEvents = async () => {
     const response = await fetch("http://localhost:8080/api/events");
     const eventsData = await response.json();
 
     dispatch({ type: GET_ALL_EVENTS, payload: { eventsData } });
-    // console.log("Events fetched...", eventsData);
   };
 
   useEffect(() => {
@@ -52,39 +44,35 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   // CREATE EVENT
-  const createNewEvent = async (e) => {
-    e.preventDefault();
+  const createNewEvent = async (newEvent) => {
+    console.log(newEvent);
     console.log("hi cathy");
     try {
-      const { event } = state;
       const response = await fetch("http://localhost:8080/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(event),
+        body: JSON.stringify(newEvent),
       });
       console.log("response", response);
 
-      // if
-      console.log("before");
-      dispatch({ type: ADD_EVENT, payload: { event } });
-      console.log("after");
+      dispatch({ type: ADD_EVENT, payload: { newEvent } });
     } catch (error) {
       console.log(error);
     }
   };
 
   // EDIT EVENT
-  const updateEvent = async (id) => {
-    console.log(id);
+  const updateEvent = async (id, updatedEvent) => {
+    console.log(id, "updatedevent", updatedEvent);
     try {
       const { event } = state;
       const response = await fetch(`http://localhost:8080/api/events/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(event),
+        body: JSON.stringify(updatedEvent),
       });
 
-      dispatch({ type: EDIT_EVENT, payload: { event, id } });
+      dispatch({ type: EDIT_EVENT, payload: { id, updatedEvent } });
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +100,7 @@ export const AppProvider = ({ children }) => {
       value={{
         ...state,
         deleteEvent,
-        handleChange,
+        // handleChange,
         createNewEvent,
         showEditModal,
         closeEditModal,
