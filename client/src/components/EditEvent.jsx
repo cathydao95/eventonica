@@ -4,20 +4,15 @@ import { useGlobalContext } from "../context";
 import { MdModeEdit, MdClose } from "react-icons/md";
 
 const EditEvent = ({ singleEvent }) => {
-  const { showEditModal, showModal, closeEditModal, editJobId, updateEvent } =
-    useGlobalContext();
+  const {
+    showEditModal,
+    showModal,
+    closeEditModal,
+    editJobId,
+    updateEvent,
+    formatEventTime,
+  } = useGlobalContext();
   const { id } = singleEvent;
-
-  // console.log("SINGLEEVENT", singleEvent);
-
-  function formatEventTime(eventTime) {
-    const date = new Date(eventTime);
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-    const day = String(date.getUTCDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-  }
 
   const [eventInfo, setEventInfo] = useState({
     title: singleEvent.title,
@@ -33,6 +28,9 @@ const EditEvent = ({ singleEvent }) => {
     setEventInfo((prevInfo) => {
       return { ...prevInfo, [e.target.name]: e.target.value };
     });
+    if (e.target.name === "eventtime") {
+      setFormattedDate(e.target.value);
+    }
   };
 
   return (

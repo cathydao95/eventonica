@@ -21,6 +21,15 @@ const initialState = {
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  function formatEventTime(eventTime) {
+    const date = new Date(eventTime);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  }
+
   // SHOW MODAL
   const showEditModal = (id) => {
     dispatch({ type: SHOW_MODAL, payload: { id } });
@@ -123,6 +132,7 @@ export const AppProvider = ({ children }) => {
         showEditModal,
         closeEditModal,
         updateEvent,
+        formatEventTime,
       }}
     >
       {children}

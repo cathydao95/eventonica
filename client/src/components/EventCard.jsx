@@ -4,16 +4,8 @@ import { useGlobalContext } from "../context";
 import { MdDateRange, MdLocationPin, MdDelete } from "react-icons/md";
 
 const EventCard = ({ singleEvent }) => {
-  const { deleteEvent } = useGlobalContext();
+  const { deleteEvent, formatEventTime } = useGlobalContext();
   const { title, location, eventtime, id } = singleEvent;
-
-  const date = new Date(eventtime);
-  const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Months are zero-based
-  const day = String(date.getUTCDate()).padStart(2, "0");
-
-  const formattedDate = `${month}/${day}/${year}`;
-
   return (
     <div className="container">
       <div className="eventContainer">
@@ -28,10 +20,10 @@ const EventCard = ({ singleEvent }) => {
           <div>
             <MdDateRange />
           </div>
-          <div> {eventtime ? formattedDate : "TBD"}</div>
+          <div> {eventtime ? formatEventTime(eventtime) : "TBD"}</div>
         </div>
-
         <div className="iconBtnContainer">
+          {/* BUTTON TO SHOW EDIT MODAL */}
           <EditEvent singleEvent={singleEvent} />
 
           <button className="iconBtn" onClick={() => deleteEvent(id)}>
