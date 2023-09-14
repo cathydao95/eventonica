@@ -2,9 +2,19 @@
   position: relative;
 }
 .modalContainer {
-  background-color: green;
+  background-color: rgb(109, 181, 109);
   display: none;
-  position: absolute;
+  position: fixed;
+  top: 100px;
+  left: 30px;
+  width: 90vw;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1rem;
 }
 
 .show {
@@ -13,4 +23,44 @@
 .modalHeader {
   display: flex;
   justify-content: space-between;
+}
+
+.btnContainer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* BUTTONS */
+.editBtn {
+  color: yellow;
+  font-size: 1.75rem;
+}
+
+.editBtn:hover {
+  color: black;
+}
+
+.edit {
+  background-color: yellow;
+  color: black;
+  width: 100px;
+}
+
+.edit:hover {
+  background-color: rgb(226, 205, 43);
+}
+
+.cancel {
+  width: 100px;
+}
+
+.closeBtn {
+  font-size: 2rem;
+}
+
+.closeBtn:hover {
+  color: white;
 }

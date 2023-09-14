@@ -1,7 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
 .eventContainer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
-  text-align: center;
-  border: 2px solid blue;
+  width: 300px;
+  padding: 1rem;
+  background-color: rgb(220, 215, 215);
+}
+
+.iconContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.iconBtnContainer {
+  display: flex;
+}
+
+.iconBtn {
+  background-color: transparent;
+  border: none;
+}
+
+.deleteBtn {
+  color: rgb(201, 63, 63);
+  font-size: 1.75rem;
+}
+
+.deleteBtn:hover {
+  color: rgb(111, 37, 37);
 }
