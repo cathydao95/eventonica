@@ -35,11 +35,13 @@ export const AppProvider = ({ children }) => {
   const getEvents = async () => {
     try {
       const response = await fetch("http://localhost:8080/api/events");
-      const eventsData = await response.json();
-      if (!response.ok) {
+
+      if (response.ok) {
+        const eventsData = await response.json();
+        dispatch({ type: GET_ALL_EVENTS, payload: { eventsData } });
+      } else if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      dispatch({ type: GET_ALL_EVENTS, payload: { eventsData } });
     } catch (error) {
       console.error("Error occured while fetching data", error);
     }
@@ -59,30 +61,37 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(newEvent),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        const eventData = await response.json();
+        const { newEvent } = eventData;
+        dispatch({ type: ADD_EVENT, payload: { newEvent } });
+      } else if (!response.ok) {
         throw new Error("Network response was not ok");
       }
     } catch (error) {
       console.error("Error occured while creating event", error);
     }
-    dispatch({ type: ADD_EVENT, payload: { newEvent } });
   };
 
   // EDIT EVENT
   const updateEvent = async (id, updatedEvent) => {
+    console.log("eventId", id, "updatedevent", updatedEvent);
     try {
-      const { event } = state;
       const response = await fetch(`http://localhost:8080/api/events/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedEvent),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        const eventData = await response.json();
+        const { updatedEvent } = eventData;
+
+        console.log("eventData", eventData);
+        dispatch({ type: EDIT_EVENT, payload: { id, updatedEvent } });
+      } else if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
-      dispatch({ type: EDIT_EVENT, payload: { id, updatedEvent } });
     } catch (error) {
       console.error("Error occured while updating event", error);
     }
