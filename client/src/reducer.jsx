@@ -4,26 +4,16 @@ import {
   ADD_EVENT,
   DELETE_EVENT,
   GET_ALL_EVENTS,
-  HANDLE_CHANGE,
   EDIT_EVENT,
 } from "./actions";
 
 const reducer = (state, action) => {
-  console.log({ action });
-  const { showModal, editJobId } = state;
   if (action.type === SHOW_MODAL) {
+    const { showModal, editJobId } = state;
     return { ...state, showModal: true, editJobId: action.payload.id };
   }
   if (action.type === CLOSE_MODAL) {
     return { ...state, showModal: false, editJobId: action.payload.id };
-  }
-
-  if (action.type === HANDLE_CHANGE) {
-    const event = state.event;
-    const newEvent = { ...event, [action.payload.name]: action.payload.value };
-    console.log("newEvent", newEvent);
-
-    return { ...state, event: newEvent };
   }
 
   if (action.type === GET_ALL_EVENTS) {
@@ -32,23 +22,24 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ADD_EVENT) {
-    console.log("hello romain");
-    const events = state.events;
-    const newEvent = action.payload.event;
-    return { ...state, events: [...events, newEvent] };
+    const { events } = state;
+    console.log(action.payload);
+    const { newEvent } = action.payload;
+    const updatedEvents = [...events, newEvent];
+    return { ...state, events: updatedEvents };
   }
 
   if (action.type === EDIT_EVENT) {
-    const events = state.events;
-    const updatedEvent = action.payload.event;
-    const update = events.map((event) => {
-      if (event.id === action.payload.id) {
-        return action.payload.event;
+    const { events } = state;
+    const { updatedEvent, id } = action.payload;
+    const updated = events.map((event) => {
+      if (event.id === id) {
+        return updatedEvent;
       }
       return event;
     });
 
-    return { ...state, events: update };
+    return { ...state, events: updated };
   }
 
   if (action.type === DELETE_EVENT) {
