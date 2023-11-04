@@ -1,42 +1,69 @@
-# Quick-setup 
 
-#### Once you have successfully setup this template and initial database, the view will look like this:
+<!-- ABOUT THE PROJECT -->
+## Eventonica
 
-![Initial View of the project](https://raw.githubusercontent.com/Yosolita1978/screenshoots/50a5573f21c1265d20d838a36b98588f9b4eefce/2023/H1/Screen%20Shot%202023-03-09%20at%208.03.32%20PM.png)
-### Your First Express and React App with a DB connection
+### Demo
 
-1. Go to your source directory in your terminal and run the command `git clone https://github.com/Yosolita1978/2023EventonicaTemplate.git <NAMENEWDIRECTORY>`
-![You will see something like this in your terminal.]
+https://github.com/cathydao95/eventonica/assets/79618165/b24280ee-6d85-4908-8d81-144614a67564
 
-> <img width="768" alt="Screen Shot 2023-03-10 at 11 10 34 AM" src="https://user-images.githubusercontent.com/102179075/224608432-5e3d18bd-7cf5-4576-8b3f-2e903106abe1.png">
 
-2. To clean your folder from the owner's git, run the command `rm -rf .git` inside the folder <NAMENEWDIRECTORY>. Then re-initialize as the owner with `git init`.
 
-3. Go to the server folder in the project (`cd server`) and run the command `npm install`
 
-4. Go to the client folder (`cd .. and cd client`) and run the command `npm install`
+## Built With
 
-5. This template has two servers already working. Both servers should start simultaneously, or "concurrently", by running `npm run dev` from within the server directory in your terminal. Please note that your backend server will run from port 8080, and your frontend React server will run from port 3000 .
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-6. To add a Postgres DB - you will need another terminal window for this part
 
-6.1 Inside your server directory create a `.env` file and copy there the values that are in `.envexample`
+* [![Node.js][Node.js-badge]][Node-url]
+* [![Express][Express-badge]][Express-url]
+* [![PostgreSQL][PostgreSQL-badge]][PostgreSQL-url]
+* [![React][React-badge]][React-url]
+* [![Vite][Vite-badge]][Vite-url]
 
-* In a different terminal window go to the psql terminal with the comand `psql`
-* Inside the psql prompt create your database eventonica with the command `create database eventonica;` (don't forget the semicolon!)
+[Node.js-badge]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node-dot-js&logoColor=white
+[Express-badge]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[PostgreSQL-badge]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[React-badge]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[Vite-badge]: https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E
 
-![You will see something like this](https://raw.githubusercontent.com/Yosolita1978/screenshoots/b6b7e47b8ccda4b9f709d20e94cacb6506d4dc13/2023/H1/Screen%20Shot%202023-03-13%20at%2011.13.13%20AM.png)
+[Node-url]: https://nodejs.org/
+[Express-url]: https://expressjs.com/
+[PostgreSQL-url]: https://www.postgresql.org/
+[React-url]: https://reactjs.org/
+[Vite-url]: https://vitejs.dev/
 
-Back in the terminal window with the project go inside the server directory and run the command `psql -d eventonica -f db.sql` that will create a table `events` with 5 rows inside your db eventonica. 
-![This will be the result of that command](https://raw.githubusercontent.com/Yosolita1978/screenshoots/b6b7e47b8ccda4b9f709d20e94cacb6506d4dc13/2023/H1/Screen%20Shot%202023-03-13%20at%2011.12.29%20AM.png)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Your DB should look like this inside the psql terminal
-![Your DB should look like this](https://raw.githubusercontent.com/Yosolita1978/screenshoots/696689a627eb5ca206b5a2eaebec7cc1efa15ffc/2023/H1/Screen%20Shot%202023-03-09%20at%208.25.54%20PM.png)
+### Installation
 
-# Links that you will need
+1. Clone project & switch into the project directory.
+   ```sh
+   git clone https://github.com/cathydao95/eventonica
+   cd eventonica
+   ```
+2. Install NPM packages on the client and server
+   ```sh
+     cd client && npm install && cd ../server && npm install
+   ```
+3. Setup Environment Variables
+   ```js
+   Copy the instructions from the .env.example files in the server.
+   ```
+4. Connect the database
+   ```js
+   cd server
+   psql eventonica -f db.sql
+   ```
+5. Start the program
+   ```js
+   cd server && npm run dev
+   ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-* The instructions for [pg](https://node-postgres.com/apis/pool)  
-* Setup [postgres correctly](https://github.com/Techtonica/curriculum/blob/main/databases/installing-postgresql.md).
+
+
+
+
 
 
 
