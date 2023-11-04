@@ -2,6 +2,13 @@
 <!-- ABOUT THE PROJECT -->
 ## Eventonica
 
+## Features
+
+- Display events fetched from the database
+- Add new events through a form
+- Delete and edit events
+- (Stretch Goal) Favorite and un-favorite events
+
 ### Demo
 
 https://github.com/cathydao95/eventonica/assets/79618165/b24280ee-6d85-4908-8d81-144614a67564
