@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Events from "./components/Events";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "./utils/context";
 
 function App() {
   const [event, setEvent] = useState({

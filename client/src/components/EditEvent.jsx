@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./EditEvent.css";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 import { MdModeEdit, MdClose } from "react-icons/md";
 
 const EditEvent = ({ singleEvent }) => {

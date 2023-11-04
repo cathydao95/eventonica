@@ -1,6 +1,6 @@
 import "./EventCard.css";
 import EditEvent from "./EditEvent";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 import { MdDateRange, MdLocationPin, MdDelete } from "react-icons/md";
 
 const EventCard = ({ singleEvent }) => {

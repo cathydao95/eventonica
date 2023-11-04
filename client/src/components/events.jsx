@@ -1,6 +1,6 @@
 import EventCard from "./EventCard";
 import "./Events.css";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../utils/context";
 
 function Events() {
   // OBTAIN EVENTS STATE FROM CONTEXT
