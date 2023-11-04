@@ -1,29 +1,21 @@
-import { useState, useEffect } from "react";
-import EventCard from "./event";
-import CardGroup from 'react-bootstrap/CardGroup';
-
+import EventCard from "./EventCard";
+import "./Events.css";
+import { useGlobalContext } from "../utils/context";
 
 function Events() {
-    const [events, setEvents] = useState([]);
-
-    const getRequest = () => {
-      fetch("http://localhost:8080/api/events")
-      .then((response) => response.json())
-      .then(events => {
-        setEvents(events); 
-        console.log('Events fetched...', events);
-        });
-    }
-
-    useEffect(() => {getRequest()}, []);
+  // OBTAIN EVENTS STATE FROM CONTEXT
+  const { events } = useGlobalContext();
 
   return (
     <div>
-    <CardGroup className="Events">
-            {events.map(event =>
-            <EventCard key={event.id} title={event.title} location={event.location} time={event.eventtime}/>
-            )}
-    </CardGroup>
+      <h2 className="header">Upcoming Events</h2>
+      <div className="eventsContainer">
+        {events.map((singleEvent, index) => {
+          return (
+            <EventCard events={events} key={index} singleEvent={singleEvent} />
+          );
+        })}
+      </div>
     </div>
   );
 }

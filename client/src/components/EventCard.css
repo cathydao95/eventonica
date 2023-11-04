@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.eventContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  background-color: rgb(220, 215, 215);
+}
+
+.iconContainer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.iconBtnContainer {
+  display: flex;
+}
+
+.iconBtn {
+  background-color: transparent;
+  border: none;
+}
+
+.deleteBtn {
+  color: rgb(201, 63, 63);
+  font-size: 1.75rem;
+}
+
+.deleteBtn:hover {
+  color: rgb(111, 37, 37);
+}
+
+@media (min-width: 600px) {
+  .eventContainer {
+    gap: 0.5rem;
+    min-width: 250px;
+  }
+}
+
+/* @media (min-width: 900px) {
+  .eventContainer {
+    gap: 0.5rem;
+    width: 400px;
+  }
+} */
