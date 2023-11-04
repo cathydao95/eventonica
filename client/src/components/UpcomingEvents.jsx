@@ -1,8 +1,8 @@
 import EventCard from "./EventCard";
-import "./Events.css";
+import "./UpcomingEvents.css";
 import { useGlobalContext } from "../utils/context";
 
-function Events() {
+function UpcomingEvents() {
   // OBTAIN EVENTS STATE FROM CONTEXT
   const { events } = useGlobalContext();
 
@@ -20,4 +20,4 @@ function Events() {
   );
 }
 
-export default Events;
+export default UpcomingEvents;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Events from "./components/Events";
+import Events from "./components/UpcomingEvents";
 import { useGlobalContext } from "./utils/context";
 
 function App() {
